@@ -13,42 +13,35 @@ import javax.security.auth.callback.Callback
 
 class HomeActivity: AppCompatActivity(), HomeView{
 
+    private lateinit var progressBar: ProgressBar
+    private lateinit var recyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val progressBar = findViewById<ProgressBar>(R.id.pb_home)
+        progressBar = findViewById(R.id.pb_home)
+        recyclerView = findViewById(R.id.rv_home)
 
-        val dataSource = NetworkProvider.providesHttpAdapter().create(HomeDataSource::class.java)
-        dataSource.discoverMovie().enqueue(object : retrofit2.Callback<HomeResponse>{
-            override fun onResponse(call: retrofit2.Call<HomeResponse>, response: Response<HomeResponse>
-            ) {
-                progressBar.visibility = View.GONE
-
-                val result = response.body()?.results
-                val itemAdapter = findViewById<RecyclerView>(R.id.rv_home)
-                itemAdapter.addItemDecoration(DividerItemDecoration(this@HomeActivity, DividerItemDecoration.VERTICAL))
-                itemAdapter.adapter = HomeAdapter(result?: emptyList())
-            }
-            override fun onFailure(call: retrofit2.Call<HomeResponse>, t:Throwable){
-                Log.e(HomeActivity::class.java.simpleName, "${t.printStackTrace()}")
-            }
-        })
+        val presenter = HomePresenter(this)
+        presenter.discoverMovie()
     }
 
     override fun onShowLoading() {
-
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun onHideLoading() {
-        TODO("Not yet implemented")
+        progressBar.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
     }
 
     override fun onResponse(result: List<Result>) {
-        TODO("Not yet implemented")
+        recyclerView.addItemDecoration(DividerItemDecoration(this@HomeActivity, DividerItemDecoration.VERTICAL))
+        recyclerView.adapter = HomeAdapter(result)
     }
 
     override fun onFailure(error: Throwable) {
-        TODO("Not yet implemented")
+        Log.e(HomeActivity::class.java.simpleName, "${error.printStackTrace()}")
     }
 }
