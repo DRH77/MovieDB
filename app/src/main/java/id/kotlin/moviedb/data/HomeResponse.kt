@@ -1,6 +1,5 @@
-package id.kotlin.moviedb
+package id.kotlin.moviedb.data
 
-import android.icu.text.CaseMap
 import com.google.gson.annotations.SerializedName
 
 class HomeResponse(

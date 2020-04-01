@@ -1,5 +1,6 @@
-package id.kotlin.moviedb
+package id.kotlin.moviedb.data
 
+import id.kotlin.moviedb.BuildConfig
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

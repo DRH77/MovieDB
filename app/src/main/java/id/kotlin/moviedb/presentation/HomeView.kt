@@ -1,4 +1,6 @@
-package id.kotlin.moviedb
+package id.kotlin.moviedb.presentation
+
+import id.kotlin.moviedb.data.Result
 
 interface HomeView {
 

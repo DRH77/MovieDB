@@ -1,19 +1,17 @@
-package id.kotlin.moviedb
+package id.kotlin.moviedb.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
-import android.widget.Adapter
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
-import java.text.FieldPosition
+import id.kotlin.moviedb.R
+import id.kotlin.moviedb.data.Result
 
 
 class HomeAdapter(private val results: List<Result>) : RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         return HomeViewHolder(
             LayoutInflater
                 .from(parent.context)
