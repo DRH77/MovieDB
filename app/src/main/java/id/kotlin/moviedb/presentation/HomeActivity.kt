@@ -32,6 +32,11 @@ class HomeActivity: DaggerAppCompatActivity(),
         presenter.discoverMovie()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDetach()
+    }
+
     override fun onShowLoading() {
         // kotlin android ext
         //pb_home.visibility = View.VISIBLE

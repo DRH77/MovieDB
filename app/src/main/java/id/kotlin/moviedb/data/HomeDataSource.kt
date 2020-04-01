@@ -1,6 +1,7 @@
 package id.kotlin.moviedb.data
 
 import id.kotlin.moviedb.BuildConfig
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,5 +12,5 @@ interface HomeDataSource {
     fun discoverMovie(
         @Query("api_key")
         apiKey: String = BuildConfig.API_KEY
-    ): Call<HomeResponse>
+    ): Single<HomeResponse>
 }
